@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 import Text from "../basic-element/text";
 import { BLUE_COLOR } from "../../constants/colors";

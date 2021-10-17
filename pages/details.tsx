@@ -5,6 +5,7 @@ import Text from "./Components/basic-element/text";
 import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
 import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "./constants/colors";
+import Button from "./Components/basic-element/button";
 
 const Details: NextPage = () => {
   return (
@@ -31,6 +32,13 @@ const Details: NextPage = () => {
             The cloud native application
           </Text>
         </Container>
+
+        <Container>
+         <Button>Open issues</Button>
+         <Button>Collaborators</Button>
+         <Button>Stars</Button>
+        </Container>
+        
       </Layout>
     </div>
   );
