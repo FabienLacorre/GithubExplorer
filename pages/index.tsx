@@ -17,17 +17,23 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <div style={{ width: 486, textAlign: "left" }}>
-          
           <Container>
             <Text size={32} bold={true} color={GREY_COLOR}>
               Select a repository
             </Text>
           </Container>
-
-          <SearchBar />
-          <Ticket />
-          <Ticket />
-          <Ticket />
+          <Container>
+            <SearchBar />
+          </Container>
+          <Container>
+            <Ticket />
+          </Container>
+          <Container>
+            <Ticket />
+          </Container>
+          <Container>
+            <Ticket />
+          </Container>
         </div>
       </main>
     </div>
