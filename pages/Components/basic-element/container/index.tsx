@@ -2,17 +2,18 @@ import * as React from "react";
 
 type Props = {
   children: any;
-  margin?: number;
+  spacing?: number;
   padding?: number;
 };
 
 const Container: React.FunctionComponent<Props> = ({
   children,
-  margin,
+  spacing,
   padding,
 }) => {
   const style = {
-    margin: margin != null ? margin : 8,
+    marginTop: spacing != null ? spacing : 16,
+    marginBottom: spacing != null ? spacing : 16,
     padding: padding != null ? padding : 0,
   };
   return <div style={style}>{children}</div>;
