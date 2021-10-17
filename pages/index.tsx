@@ -1,8 +1,8 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 import SearchBar from "./Components/search-bar";
-
+import Ticket from "./Components/ticket";
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -12,14 +12,17 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-       <h1>Select a repository</h1>
-       <div style={{width: 486}}>
-       <SearchBar/>
-       </div>
-       
+        <div style={{ width: 486, textAlign: "left" }}>
+        <h1 style={{ fontWeight: "bold" }}>Select a repository</h1>
+
+          <SearchBar />
+          <Ticket />
+          <Ticket />
+          <Ticket />
+        </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
