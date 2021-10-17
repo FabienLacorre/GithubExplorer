@@ -26,10 +26,43 @@ const Home: NextPage = () => {
   );
 };
 
+const TicketContainer: React.FunctionComponent<{ data: any }> = ({ data }) => {
+  const router = useRouter();
+
+  return (
+    <>
+      {data && data.length > 0 && (
+        <div className={styles.ticketContainer}>
+          {data.map((e: any, index: number) => {
+            return (
+              <div key={index + "tickets"}>
+                <Ticket
+                  handlerRedirection={() => {
+                    router.push({
+                      pathname: "/details",
+                      query: { repo: "test" },
+                    });
+                  }}
+                  title={e?.full_name}
+                  subTitle={e?.description}
+                  logoUrl={e?.owner.avatar_url}
+                />
+                {/* SEPARATOR IF NOT THE LAST ELEMENT */}
+                {index != data.length - 1 && (
+                  <div style={{ marginBottom: 8 }} />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
+  );
+};
+
 const HomeContent: React.FunctionComponent<{}> = ({}) => {
   const [data, setData] = useState([]);
   const [inputContent, setInputContent] = useState("traefik/mesh");
-  const router = useRouter();
 
   const fetchData = async () => {
     try {
@@ -58,7 +91,6 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
             Select a repository
           </Text>
         </Container>
-
         {/* INPUT + FORM SEACH BUTTON */}
         <form>
           <Container>
@@ -69,36 +101,8 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
               Search
             </Button>
           </Container>
+          <TicketContainer data={data} />
         </form>
-
-        {/* FETCHED DATAS */}
-        {data && data.length > 0 && (
-          <div className={styles.ticketContainer}>
-            {data.map((e: any, index: number) => {
-              return (
-                <>
-                  {/* ELEMENTS */}
-                  <Ticket
-                    key={index + "tickets"}
-                    handlerRedirection={() => {
-                      router.push({
-                        pathname: "/details",
-                        query: { repo: "test" },
-                      });
-                    }}
-                    title={e?.full_name}
-                    subTitle={e?.description}
-                    logoUrl={e?.owner.avatar_url}
-                  />
-                  {/* SEPARATOR IF NOT THE LAST ELEMENT */}
-                  {index != data.length - 1 && (
-                    <div style={{ marginBottom: 8 }} />
-                  )}
-                </>
-              );
-            })}
-          </div>
-        )}
       </div>
     </div>
   );
