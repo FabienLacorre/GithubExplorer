@@ -6,8 +6,8 @@ import Text from "./Components/basic-element/text";
 import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
 import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "./constants/colors";
-import Button from "./Components/basic-element/button";
 import { Line } from "react-chartjs-2";
+import Button from "./Components/basic-element/button";
 
 const Details: NextPage = () => {
   return (
@@ -26,16 +26,15 @@ const Details: NextPage = () => {
 
 const DetailContent: React.FunctionComponent<{}> = ({}) => {
   const [data, setData] = useState([]);
+  const [date, setDate] = useState("2020-01-01");
   const [xValues, setXValues] = useState([]);
   const [issuesValues, setIssuesValues] = useState([]);
-
-  useEffect(() => {
-    async function fetch() {
-      await fetchData();
-    }
-    fetch();
-  }, []);
-
+  const options = {
+    since: {
+      date,
+      time: "00:00:00",
+    },
+  };
   const issues = {
     label: "Open issues",
     fill: false,
@@ -52,12 +51,12 @@ const DetailContent: React.FunctionComponent<{}> = ({}) => {
     datasets: [issues],
   };
 
-  const options = {
-    since: {
-      date: "2020-01-01",
-      time: "00:00:00",
-    },
-  };
+  useEffect(() => {
+    async function fetch() {
+      await fetchData();
+    }
+    fetch();
+  }, []);
 
   const formatDataIssues = (commits: any) => {
     const tmpXValues: any = [];
@@ -116,9 +115,20 @@ const DetailContent: React.FunctionComponent<{}> = ({}) => {
       </Container>
 
       <Container>
-        <Button>Open issues</Button>
-        <Button>Collaborators</Button>
-        <Button>Stars</Button>
+        <Button clickHandler={fetchData}>Change date</Button>
+        <input
+          style={{
+            height: 40,
+            paddingLeft: 8,
+            borderRadius: 8,
+            border: `1px solid ${BLUE_COLOR}`,
+          }}
+          onChange={(e) => {
+            setDate(e.target.value);
+          }}
+          value={date}
+          type="date"
+        />
       </Container>
 
       <Container>
