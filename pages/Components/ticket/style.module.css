@@ -1,3 +1,9 @@
+.ticketContainer {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 .ticket {
   position: relative;
   height: 66px;

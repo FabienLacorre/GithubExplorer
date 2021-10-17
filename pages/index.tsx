@@ -64,7 +64,7 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
               Search
             </Button>
           </Container>
-          <TicketContainer data={data} />
+          <TicketContainer visibility={data && data.length > 0} data={data} />
         </form>
       </div>
     </div>
