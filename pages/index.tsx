@@ -53,7 +53,11 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
             ? data.map((e: any, index: number) => {
                 return (
                   <Container key={index + "tickets"}>
-                    <Ticket />
+                    <Ticket
+                      title={e?.full_name}
+                      subTitle={e?.description}
+                      logoUrl={e?.owner.avatar_url}
+                    />
                   </Container>
                 );
               })

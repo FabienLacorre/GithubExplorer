@@ -3,25 +3,37 @@ import styles from "./style.module.css";
 import Text from "../basic-element/text";
 import { BLUE_COLOR } from "../../constants/colors";
 
-const ImageLogo: React.FunctionComponent<{}> = () => {
+const ImageLogo: React.FunctionComponent<{ logoUrl: string }> = ({
+  logoUrl,
+}) => {
   return (
     <div className={styles.logoContainer}>
-      <img
-        className={styles.logoImage}
-        src="https://picsum.photos/200"
-        alt=""
-      />
+      <img className={styles.logoImage} src={logoUrl} alt="" />
     </div>
   );
 };
 
-const TitleAndDescription: React.FunctionComponent<{}> = () => {
+const TitleAndDescription: React.FunctionComponent<{
+  title: string;
+  subTitle: string;
+}> = ({ title, subTitle }) => {
+  let titleSubstring = title;
+  let subTitleSubstring = subTitle;
+
+  if (titleSubstring?.length > 20) {
+    titleSubstring = titleSubstring.substring(0, 20) + "...";
+  }
+
+  if (subTitleSubstring?.length > 40) {
+    subTitleSubstring = subTitleSubstring.substring(0, 40) + "...";
+  }
   return (
     <div className={styles.textContainer}>
       <Text size={14} bold={true}>
-        Traefik/mesh
+        {titleSubstring}
       </Text>
-      <Text size={14}>Traefik Mesh - SImpler Service Mesh</Text>
+      <div style={{ height: 4 }}></div>
+      <Text size={14}>{subTitleSubstring}</Text>
     </div>
   );
 };
@@ -43,7 +55,11 @@ const SelectButton: React.FunctionComponent<{ display: boolean }> = ({
   );
 };
 
-const Ticket: React.FunctionComponent<{}> = () => {
+const Ticket: React.FunctionComponent<{
+  title: string;
+  subTitle: string;
+  logoUrl: string;
+}> = ({ title, subTitle, logoUrl }) => {
   const [displaySelectButton, setDisplaySelectButton] = useState(false);
 
   return (
@@ -57,8 +73,8 @@ const Ticket: React.FunctionComponent<{}> = () => {
       }}
     >
       <div className={styles.container}>
-        <ImageLogo />
-        <TitleAndDescription />
+        <ImageLogo logoUrl={logoUrl} />
+        <TitleAndDescription title={title} subTitle={subTitle} />
         <SelectButton display={displaySelectButton} />
       </div>
     </div>
