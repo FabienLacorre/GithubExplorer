@@ -1,0 +1,8 @@
+.layoutContainer {
+    overflow-y: scroll;
+    height: 100vw;
+    width: 100vw;
+    padding-top: 66px;
+    padding-left: 50px;
+    padding-right: 50pxF;
+}

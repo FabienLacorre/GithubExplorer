@@ -2,7 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Rubik
+  font-family: Rubik;
+  overflow: hidden;
 }
 
 a {
