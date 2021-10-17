@@ -9,9 +9,26 @@ import Container from "./Components/basic-element/container";
 import { GREY_COLOR } from "./constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
+
+const Home: NextPage = () => {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Traefik</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Layout>
+        <HomeContent />
+      </Layout>
+    </div>
+  );
+};
+
+
 const HomeContent: React.FunctionComponent<{}> = ({}) => {
   const [data, setData] = useState([]);
-  const [inputContent, setInputContent] = useState("this is a test");
+  const [inputContent, setInputContent] = useState("");
 
   const fetchData = async () => {
     try {
@@ -34,12 +51,14 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
   return (
     <div className={styles.main}>
       <div style={{ width: 486, textAlign: "left" }}>
+        {/* TITLE HEADER */}
         <Container>
           <Text size={32} bold={true} color={GREY_COLOR}>
             Select a repository
           </Text>
         </Container>
 
+        {/* INPUT + FORM SEACH BUTTON */}
         <Container>
           <form>
             <Container>
@@ -51,6 +70,7 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
           </form>
         </Container>
 
+        {/* FETCHED DATAS */}
         <div className={styles.ticketContainer}>
           {data && data.length > 0
             ? data.map((e: any, index: number) => {
@@ -71,18 +91,5 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
   );
 };
 
-const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Traefik</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Layout>
-        <HomeContent />
-      </Layout>
-    </div>
-  );
-};
 export default Home;
+
