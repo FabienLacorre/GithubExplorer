@@ -10,6 +10,12 @@
   background-color: white;
   cursor: pointer;
   overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.ticket:hover {
+  background-color: #f5f5f5;
+  border: 1px solid #6786d3;
 }
 
 .container {

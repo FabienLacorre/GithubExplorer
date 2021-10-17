@@ -35,7 +35,7 @@ textarea:focus, input:focus{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #454545;
+  background: #6786D3;
   border: 2px solid #fbfbfd;
   box-sizing: border-box;
   border-radius: 50px;
