@@ -76,8 +76,10 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
           <div className={styles.ticketContainer}>
             {data.map((e: any, index: number) => {
               return (
-                <Container key={index + "tickets"}>
+                <>
+                  {/* ELEMENTS */}
                   <Ticket
+                    key={index + "tickets"}
                     handlerRedirection={() => {
                       router.push({
                         pathname: "/details",
@@ -88,7 +90,11 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
                     subTitle={e?.description}
                     logoUrl={e?.owner.avatar_url}
                   />
-                </Container>
+                  {/* SEPARATOR IF NOT THE LAST ELEMENT */}
+                  {index != data.length - 1 && (
+                    <div style={{ marginBottom: 8 }} />
+                  )}
+                </>
               );
             })}
           </div>
