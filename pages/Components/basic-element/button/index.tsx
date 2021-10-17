@@ -11,6 +11,8 @@ type Props = {
   colorHover?: string;
   backgroundColor?: string;
   backgroundColorHover?: string;
+  clickHandler?: any;
+  fullWidth?: boolean,
 };
 
 const Button: React.FunctionComponent<Props> = ({
@@ -19,6 +21,8 @@ const Button: React.FunctionComponent<Props> = ({
   colorHover,
   backgroundColor,
   backgroundColorHover,
+  clickHandler,
+  fullWidth,
 }) => {
   const [hoverStyle, setHoverStyle] = useState(false);
 
@@ -32,6 +36,7 @@ const Button: React.FunctionComponent<Props> = ({
     paddingRight: 24,
     cursor: "pointer",
     transition: "0.3s ease",
+    width: fullWidth == true ? "100%" : "",
   };
 
   const colorStyle = {
@@ -53,6 +58,7 @@ const Button: React.FunctionComponent<Props> = ({
 
   return (
     <button
+      onClick={clickHandler}
       onMouseLeave={() => setHoverStyle(false)}
       onMouseOver={() => setHoverStyle(true)}
       style={{ ...style, ...currentStyles }}

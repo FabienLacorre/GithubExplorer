@@ -1,7 +1,9 @@
 import * as React from "react";
 import styles from "./style.module.css";
 
-const Ticket: React.FunctionComponent<{}> = () => {
+const Ticket: React.FunctionComponent<{ handlerChange?: any }> = ({
+  handlerChange,
+}) => {
   const style = {
     height: "36px",
     width: "100%",
@@ -9,7 +11,14 @@ const Ticket: React.FunctionComponent<{}> = () => {
     border: "1px solid #D7D7D7",
     paddingLeft: "18px",
   };
-  return <input style={style} type="text" placeholder="Search ..." />;
+  return (
+    <input
+      onChange={(e) => handlerChange(e.target.value)}
+      style={style}
+      type="text"
+      placeholder="Search ..."
+    />
+  );
 };
 
 export default Ticket;

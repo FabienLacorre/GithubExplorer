@@ -15,6 +15,10 @@ a {
   box-sizing: border-box;
 }
 
+textarea:focus, input:focus{
+  outline: none;
+}
+
 @font-face {
   font-family: "Rubik";
   src: url("../public/fonts/Rubik-Regular.ttf");
