@@ -8,6 +8,7 @@ import Container from "./Components/basic-element/container";
 import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "./constants/colors";
 import { Line } from "react-chartjs-2";
 import Button from "./Components/basic-element/button";
+import { useRouter } from "next/router";
 
 const Details: NextPage = () => {
   return (
@@ -29,6 +30,7 @@ const DetailContent: React.FunctionComponent<{}> = ({}) => {
   const [date, setDate] = useState("2020-01-01");
   const [xValues, setXValues] = useState([]);
   const [issuesValues, setIssuesValues] = useState([]);
+  const router = useRouter();
   const options = {
     since: {
       date,
@@ -98,9 +100,18 @@ const DetailContent: React.FunctionComponent<{}> = ({}) => {
   return (
     <>
       <Container>
-        <Text size={16} bold={true} color={BLUE_COLOR}>
-          Choose another repository
-        </Text>
+        <div
+        style={{cursor: "pointer"}}
+          onClick={() => {
+            router.push({
+              pathname: "/",
+            });
+          }}
+        >
+          <Text size={16} bold={true} color={BLUE_COLOR}>
+            Choose another repository
+          </Text>
+        </div>
       </Container>
       <Container>
         <Text size={50} bold={true} color={GREY_COLOR}>

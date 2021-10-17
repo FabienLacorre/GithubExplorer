@@ -9,6 +9,7 @@ import Container from "./Components/basic-element/container";
 import { GREY_COLOR } from "./constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   return (
@@ -25,10 +26,10 @@ const Home: NextPage = () => {
   );
 };
 
-
 const HomeContent: React.FunctionComponent<{}> = ({}) => {
   const [data, setData] = useState([]);
-  const [inputContent, setInputContent] = useState("");
+  const [inputContent, setInputContent] = useState("traefik/mesh");
+  const router = useRouter();
 
   const fetchData = async () => {
     try {
@@ -59,16 +60,16 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
         </Container>
 
         {/* INPUT + FORM SEACH BUTTON */}
-        <Container>
-          <form>
+        <form>
+          <Container>
             <Container>
-              <SearchBar handlerChange={setInputContent} />
+              <SearchBar value={inputContent} handlerChange={setInputContent} />
             </Container>
             <Button fullWidth={true} clickHandler={(e: any) => handleClick(e)}>
               Search
             </Button>
-          </form>
-        </Container>
+          </Container>
+        </form>
 
         {/* FETCHED DATAS */}
         <div className={styles.ticketContainer}>
@@ -77,6 +78,12 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
                 return (
                   <Container key={index + "tickets"}>
                     <Ticket
+                      handlerRedirection={() => {
+                        router.push({
+                          pathname: "/details",
+                          query: { repo: "test" },
+                        });
+                      }}
                       title={e?.full_name}
                       subTitle={e?.description}
                       logoUrl={e?.owner.avatar_url}
@@ -92,4 +99,3 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
 };
 
 export default Home;
-

@@ -59,11 +59,13 @@ const Ticket: React.FunctionComponent<{
   title: string;
   subTitle: string;
   logoUrl: string;
-}> = ({ title, subTitle, logoUrl }) => {
+  handlerRedirection: any;
+}> = ({ title, subTitle, logoUrl, handlerRedirection }) => {
   const [displaySelectButton, setDisplaySelectButton] = useState(false);
 
   return (
     <div
+      onClick={() => handlerRedirection()}
       className={styles.ticket}
       onMouseOver={() => {
         setDisplaySelectButton(true);
