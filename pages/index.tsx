@@ -3,13 +3,12 @@ import type { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SearchBar from "./Components/search-bar";
-import Ticket from "./Components/ticket";
+import TicketContainer from "./Components/ticket/ticketContainer";
 import Text from "./Components/basic-element/text";
 import Container from "./Components/basic-element/container";
 import { GREY_COLOR } from "./constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
-import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   return (
@@ -23,40 +22,6 @@ const Home: NextPage = () => {
         <HomeContent />
       </Layout>
     </div>
-  );
-};
-
-const TicketContainer: React.FunctionComponent<{ data: any }> = ({ data }) => {
-  const router = useRouter();
-
-  return (
-    <>
-      {data && data.length > 0 && (
-        <div className={styles.ticketContainer}>
-          {data.map((e: any, index: number) => {
-            return (
-              <div key={index + "tickets"}>
-                <Ticket
-                  handlerRedirection={() => {
-                    router.push({
-                      pathname: "/details",
-                      query: { repo: "test" },
-                    });
-                  }}
-                  title={e?.full_name}
-                  subTitle={e?.description}
-                  logoUrl={e?.owner.avatar_url}
-                />
-                {/* SEPARATOR IF NOT THE LAST ELEMENT */}
-                {index != data.length - 1 && (
-                  <div style={{ marginBottom: 8 }} />
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </>
   );
 };
 
@@ -85,13 +50,11 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
   return (
     <div className={styles.main}>
       <div style={{ width: 486, textAlign: "left" }}>
-        {/* TITLE HEADER */}
         <Container>
           <Text size={32} bold={true} color={GREY_COLOR}>
             Select a repository
           </Text>
         </Container>
-        {/* INPUT + FORM SEACH BUTTON */}
         <form>
           <Container>
             <Container>
