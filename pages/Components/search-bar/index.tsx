@@ -1,7 +1,7 @@
 import * as React from 'react'
-import styles from "./SearchBar.module.css";
+import styles from "./style.module.css";
 
-const SearchBar: React.FunctionComponent<{}> = () => {
+const Ticket: React.FunctionComponent<{}> = () => {
 
     console.log(styles);
     return (
@@ -11,6 +11,6 @@ const SearchBar: React.FunctionComponent<{}> = () => {
     )
 }
 
-export default SearchBar;
+export default Ticket;
 
     
