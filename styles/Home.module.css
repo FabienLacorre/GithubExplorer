@@ -113,6 +113,12 @@
   margin-left: 0.5rem;
 }
 
+.ticketContainer {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

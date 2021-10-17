@@ -40,15 +40,18 @@ const HomeContent: React.FunctionComponent<{}> = ({}) => {
           </Text>
         </Container>
 
-        <form>
-          <Container>
-            <SearchBar handlerChange={setInputContent} />
-          </Container>
-          <Button fullWidth={true} clickHandler={(e: any) => handleClick(e)}>
-            Search
-          </Button>
-        </form>
-        <div>
+        <Container>
+          <form>
+            <Container>
+              <SearchBar handlerChange={setInputContent} />
+            </Container>
+            <Button fullWidth={true} clickHandler={(e: any) => handleClick(e)}>
+              Search
+            </Button>
+          </form>
+        </Container>
+
+        <div className={styles.ticketContainer}>
           {data && data.length > 0
             ? data.map((e: any, index: number) => {
                 return (

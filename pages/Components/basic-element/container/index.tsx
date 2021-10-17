@@ -13,7 +13,6 @@ const Container: React.FunctionComponent<Props> = ({
   padding,
 }) => {
   const style = {
-    marginTop: spacing != null ? spacing : DEFAULT_SPACING_CONTAINER,
     marginBottom: spacing != null ? spacing : DEFAULT_SPACING_CONTAINER,
     padding: padding != null ? padding : 0,
   };
