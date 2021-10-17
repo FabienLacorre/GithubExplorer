@@ -1,7 +1,52 @@
-.container {
+.ticket {
+  position: relative;
   height: 66px;
   width: 100%;
   border-radius: 14px;
   border: 1px solid #d7d7d7;
-  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 7px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+}
+
+.logoContainer {
+  height: 51px;
+  width: 51px;
+}
+
+.textContainer {
+  margin-left: 14px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.logoImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.selectButtonContainer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: calc(100% - 13px);
+  right: 15px;
+  transition: 0.3s ease;
+}
+
+.selectButton {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+  cursor: pointer;
 }
