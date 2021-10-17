@@ -9,7 +9,7 @@ type Props = {
   color?: string;
 };
 
-const CustomText: React.FunctionComponent<Props> = ({
+const Text: React.FunctionComponent<Props> = ({
   children,
   size,
   bold,
@@ -23,4 +23,4 @@ const CustomText: React.FunctionComponent<Props> = ({
   return <span style={style}>{children}</span>;
 };
 
-export default CustomText;
+export default Text;

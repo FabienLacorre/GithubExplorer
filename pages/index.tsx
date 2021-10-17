@@ -3,7 +3,8 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SearchBar from "./Components/search-bar";
 import Ticket from "./Components/ticket";
-import CustomText from "./Components/UI-elements/custom-text";
+import Text from "./Components/basic-element/text";
+import Container from "./Components/basic-element/container";
 import { GREY_COLOR } from "./constants/colors";
 
 const Home: NextPage = () => {
@@ -16,9 +17,12 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <div style={{ width: 486, textAlign: "left" }}>
-          <CustomText size={32} bold={true} color={GREY_COLOR}>
-            Select a repository
-          </CustomText>
+          
+          <Container>
+            <Text size={32} bold={true} color={GREY_COLOR}>
+              Select a repository
+            </Text>
+          </Container>
 
           <SearchBar />
           <Ticket />
