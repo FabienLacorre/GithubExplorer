@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./style.module.css";
 import Text from "../basic-element/text";
-import { BLUE_COLOR } from "../../constants/colors";
+import { BLUE_COLOR } from "../../../constants/colors";
 
 const ImageLogo: React.FunctionComponent<{ logoUrl: string }> = ({
   logoUrl,

@@ -6,7 +6,7 @@ import SearchBar from "./Components/search-bar";
 import TicketContainer from "./Components/ticket/ticketContainer";
 import Text from "./Components/basic-element/text";
 import Container from "./Components/basic-element/container";
-import { GREY_COLOR } from "./constants/colors";
+import { GREY_COLOR } from "../constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 

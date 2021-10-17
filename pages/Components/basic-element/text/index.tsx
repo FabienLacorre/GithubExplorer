@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BLACK_COLOR } from "../../../constants/colors";
+import { BLACK_COLOR } from "../../../../constants/colors";
 
 type Props = {
   children: any;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styles  from "../../../../styles/Layout.module.css";
-import { VERY_LIGHT_GREY_COLOR } from "../../../constants/colors";
+import { VERY_LIGHT_GREY_COLOR } from "../../../../constants/colors";
 
 type Props = {
   children: any;

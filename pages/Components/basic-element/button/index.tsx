@@ -4,7 +4,7 @@ import {
   BLUE_COLOR,
   DARK_BLUE_COLOR,
   WHITE_COLOR,
-} from "../../../constants/colors";
+} from "../../../../constants/colors";
 
 type Props = {
   color?: string;

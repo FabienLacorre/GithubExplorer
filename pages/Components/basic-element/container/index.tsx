@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DEFAULT_SPACING_CONTAINER } from "../../../constants/spacing";
+import { DEFAULT_SPACING_CONTAINER } from "../../../../constants/spacing";
 
 type Props = {
   children: any;

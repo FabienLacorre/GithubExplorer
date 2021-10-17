@@ -5,7 +5,7 @@ import styles from "../styles/Home.module.css";
 import Text from "./Components/basic-element/text";
 import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
-import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "./constants/colors";
+import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "../constants/colors";
 import { Line } from "react-chartjs-2";
 import Button from "./Components/basic-element/button";
 import { useRouter } from "next/router";
