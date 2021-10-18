@@ -121,13 +121,4 @@ const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
-  const res = await fetch("https://api.github.com/users/FabienLacorre");
-  const post = await res.json();
-
-  return {
-    props: { post },
-  };
-};
-
 export default Home;
