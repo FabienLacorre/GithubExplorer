@@ -5,7 +5,12 @@ import styles from "../styles/Home.module.css";
 import Text from "./Components/basic-element/text";
 import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
-import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "../constants/colors";
+import {
+  BLUE_COLOR,
+  GREY_COLOR,
+  LIGHT_GREY_COLOR,
+  RED_ERROR_COLOR,
+} from "../constants/colors";
 import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
@@ -17,7 +22,7 @@ const Details: React.FunctionComponent<{
 }> = ({ newData, owner, repo }) => {
   const router = useRouter();
   const [issuesValues, setIssuesValues] = useState([]);
-
+  const [messageDisplay, setMessageDisplay] = useState("");
   console.log(newData);
   console.log(owner);
   console.log(repo);
@@ -42,11 +47,19 @@ const Details: React.FunctionComponent<{
   }, []);
 
   const formatDataIssues = (issues: any) => {
+    console.log("issues", issues);
+    if (issues.message) {
+      setMessageDisplay(issues.message);
+      return;
+    }
+    if (issues == null || issues?.lenth == null) {
+      return;
+    }
     const values: any = {};
     xValues.forEach((x: any) => {
       values[x] = { number: 0 };
     });
-    issues.forEach((e: any) => {
+    issues?.forEach((e: any) => {
       values[e?.updated_at?.substring(0, 7)].number += 1;
     });
     const tmpValues: any = [];
@@ -93,7 +106,13 @@ const Details: React.FunctionComponent<{
           </Container>
 
           <Container>
-            <Line data={dataChart} width={100} height={25} />
+            {messageDisplay != "" ? (
+              <Text bold={true} size={16} color={RED_ERROR_COLOR}>
+                {messageDisplay}
+              </Text>
+            ) : (
+              <Line data={dataChart} width={100} height={25} />
+            )}
           </Container>
         </div>
       </Layout>
