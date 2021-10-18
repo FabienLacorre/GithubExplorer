@@ -12,16 +12,20 @@ import Button from "./Components/basic-element/button";
 
 const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [inputContent, setInputContent] = useState("traefik/mesh");
 
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const req = await fetch(
         `https://api.github.com/search/repositories?q=${inputContent}`
       );
       const newData = await req.json();
       setData(newData.items);
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   };
@@ -52,7 +56,7 @@ const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
               favourite github reposititories.
             </Text>
           </Container>
-          <div style={{ width: 486, textAlign: "left", marginTop:  60}}>
+          <div style={{ width: 486, textAlign: "left", marginTop: 60 }}>
             <Container>
               <Text size={32} bold={true} color={GREY_COLOR}>
                 Select a repository
@@ -70,7 +74,11 @@ const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
                   fullWidth={true}
                   clickHandler={(e: any) => handleClick(e)}
                 >
-                  Search
+                  {isLoading == true ? (
+                    <span>Loading ...</span>
+                  ) : (
+                    <span> Search</span>
+                  )}
                 </Button>
               </Container>
               <TicketContainer
