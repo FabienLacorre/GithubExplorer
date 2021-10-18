@@ -1,10 +1,10 @@
 import * as React from "react";
-import Button from "../button";
-import Text from "../text";
+import Button from "../basic-element/button";
+import Text from "../basic-element/text";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { StyledTopBar, StyledTitleContainer } from "./style";
-import { LIGHT_THEME } from "../../../../constants/colors";
+import { LIGHT_THEME } from "../../../constants/colors";
 type Props = {};
 
 const TopBar: React.FunctionComponent<Props> = ({}) => {
