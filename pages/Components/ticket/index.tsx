@@ -46,11 +46,9 @@ const SelectButton: React.FunctionComponent<{ display: boolean }> = ({
       style={{ opacity: display == true ? 1 : 0 }}
       className={styles.selectButtonContainer}
     >
-      <button className={styles.selectButton}>
-        <Text size={14} bold={true} color={BLUE_COLOR}>
-          Select
-        </Text>
-      </button>
+      <Text size={14} bold={true} color={BLUE_COLOR}>
+        Select
+      </Text>
     </div>
   );
 };
