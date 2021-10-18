@@ -10,33 +10,13 @@ import { Line } from "react-chartjs-2";
 import Button from "./Components/basic-element/button";
 import { useRouter } from "next/router";
 
-const Details: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Details</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Layout>
-        <DetailContent />
-      </Layout>
-    </div>
-  );
-};
-
-const DetailContent: React.FunctionComponent<{}> = ({}) => {
-  const [data, setData] = useState([]);
+const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
+  console.log("newData", newData);
+  const router = useRouter();
   const [date, setDate] = useState("2020-01-01");
   const [xValues, setXValues] = useState([]);
   const [issuesValues, setIssuesValues] = useState([]);
-  const router = useRouter();
-  const options = {
-    since: {
-      date,
-      time: "00:00:00",
-    },
-  };
+
   const issues = {
     label: "Open issues",
     fill: false,
@@ -54,10 +34,7 @@ const DetailContent: React.FunctionComponent<{}> = ({}) => {
   };
 
   useEffect(() => {
-    async function fetch() {
-      await fetchData();
-    }
-    fetch();
+    formatDataIssues(newData);
   }, []);
 
   const formatDataIssues = (commits: any) => {
@@ -80,73 +57,87 @@ const DetailContent: React.FunctionComponent<{}> = ({}) => {
     });
     setXValues(tmpDate.reverse());
     setIssuesValues(tmpValues.reverse());
-  };
-
-  const fetchData = async () => {
-    const username = "traefik";
-    const repo = "mesh";
-    try {
-      const req = await fetch(
-        `https://api.github.com/repos/${username}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
-      );
-      const newData = await req.json();
-      setData(newData);
-      formatDataIssues(newData);
-    } catch (err) {
-      console.log(err);
-    }
+    console.log(tmpValues);
   };
 
   return (
-    <>
-      <Container>
-        <div
-        style={{cursor: "pointer"}}
-          onClick={() => {
-            router.push({
-              pathname: "/",
-            });
-          }}
-        >
-          <Text size={16} bold={true} color={BLUE_COLOR}>
-            Choose another repository
-          </Text>
-        </div>
-      </Container>
-      <Container>
-        <Text size={50} bold={true} color={GREY_COLOR}>
-          Traefik/traefik
-        </Text>
-      </Container>
+    <div className={styles.container}>
+      <Head>
+        <title>Details</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      <Container>
-        <Text size={20} color={LIGHT_GREY_COLOR}>
-          The cloud native application
-        </Text>
-      </Container>
+      <Layout>
+        <>
+          <Container>
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                router.push({
+                  pathname: "/",
+                });
+              }}
+            >
+              <Text size={16} bold={true} color={BLUE_COLOR}>
+                Choose another repository
+              </Text>
+            </div>
+          </Container>
+          <Container>
+            <Text size={50} bold={true} color={GREY_COLOR}>
+              Traefik/traefik
+            </Text>
+          </Container>
 
-      <Container>
-        <Button clickHandler={fetchData}>Change date</Button>
-        <input
-          style={{
-            height: 40,
-            paddingLeft: 8,
-            borderRadius: 8,
-            border: `1px solid ${BLUE_COLOR}`,
-          }}
-          onChange={(e) => {
-            setDate(e.target.value);
-          }}
-          value={date}
-          type="date"
-        />
-      </Container>
+          <Container>
+            <Text size={20} color={LIGHT_GREY_COLOR}>
+              The cloud native application
+            </Text>
+          </Container>
 
-      <Container>
-        <Line data={dataChart} width={100} height={25} />
-      </Container>
-    </>
+          <Container>
+            <Button clickHandler={() => {}}>Change date</Button>
+            <input
+              style={{
+                height: 40,
+                paddingLeft: 8,
+                borderRadius: 8,
+                border: `1px solid ${BLUE_COLOR}`,
+              }}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              value={date}
+              type="date"
+            />
+          </Container>
+          <Container>
+            <Line data={dataChart} width={100} height={25} />
+          </Container>
+        </>
+      </Layout>
+    </div>
   );
+};
+
+export const getServerSideProps = async (context: any) => {
+  console.log(context.query);
+  const options = {
+    since: {
+      date: "2020-01-01",
+      time: "00:00:00",
+    },
+  };
+
+  const { owner, repo } = context.query;
+  if (owner && repo) {
+    const req = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
+    );
+    const newData = await req.json();
+    console.log(newData);
+    return { props: { newData } };
+  }
 };
 
 export default Details;

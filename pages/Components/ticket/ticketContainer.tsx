@@ -8,6 +8,7 @@ const TicketContainer: React.FunctionComponent<{
 }> = ({ data, visibility }) => {
   const router = useRouter();
 
+  console.log(data);
   return (
     <div className={visibility == true ? styles.ticketContainer : ""}>
       {data.map((e: any, index: number) => {
@@ -17,7 +18,10 @@ const TicketContainer: React.FunctionComponent<{
               handlerRedirection={() => {
                 router.push({
                   pathname: "/details",
-                  query: { repo: "test" },
+                  query: {
+                    owner: e?.full_name.split("/")[0],
+                    repo: e?.full_name.split("/")[1],
+                  },
                 });
               }}
               title={e?.full_name}
