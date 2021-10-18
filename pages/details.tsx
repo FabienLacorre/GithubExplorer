@@ -130,7 +130,14 @@ export const getServerSideProps = async (context: any) => {
       `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
     );
     const newData = await req.json();
-    return { props: { newData, owner, repo, description } };
+    return {
+      props: {
+        newData,
+        owner,
+        repo,
+        description: description == null ? "" : description,
+      },
+    };
   } else {
     return {
       props: {
