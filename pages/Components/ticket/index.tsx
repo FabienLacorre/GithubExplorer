@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./style.module.css";
 import Text from "../basic-element/text";
-import { BLUE_COLOR } from "../../../constants/colors";
+import { GetCorrectTheme } from "../../../constants/colors";
 
 const ImageLogo: React.FunctionComponent<{ logoUrl: string }> = ({
   logoUrl,
@@ -41,12 +41,21 @@ const TitleAndDescription: React.FunctionComponent<{
 const SelectButton: React.FunctionComponent<{ display: boolean }> = ({
   display,
 }) => {
+  const [themeValue, setThemeValue]: any = useState({});
+  
+  useEffect(() => {
+    // THEME SWAP CODE
+    const themeValueLocalStorage: string | null =
+      window.localStorage.getItem("THEME");
+    setThemeValue(GetCorrectTheme(themeValueLocalStorage));
+  }, []);
+
   return (
     <div
       style={{ opacity: display == true ? 1 : 0 }}
       className={styles.selectButtonContainer}
     >
-      <Text size={14} bold={true} color={BLUE_COLOR}>
+      <Text size={14} bold={true} color={themeValue.BLUE_COLOR}>
         Select
       </Text>
     </div>
@@ -60,6 +69,14 @@ const Ticket: React.FunctionComponent<{
   handlerRedirection: any;
 }> = ({ title, subTitle, logoUrl, handlerRedirection }) => {
   const [displaySelectButton, setDisplaySelectButton] = useState(false);
+  const [themeValue, setThemeValue]: any = useState({});
+
+  useEffect(() => {
+    // THEME SWAP CODE
+    const themeValueLocalStorage: string | null =
+      window.localStorage.getItem("THEME");
+    setThemeValue(GetCorrectTheme(themeValueLocalStorage));
+  }, []);
 
   return (
     <div

@@ -49,10 +49,10 @@ const TopBar: React.FunctionComponent<Props> = ({}) => {
       </Text>
       <Button
         clickHandler={SwapTheme}
-        backgroundColor={themeValue.WHITE_COLOR}
-        color={themeValue.BLUE_COLOR}
-        backgroundColorHover={themeValue.VERY_LIGHT_GREY_COLOR}
-        colorHover={themeValue.BLUE_COLOR}
+        backgroundColor={themeValue.BLUE_COLOR}
+        color={themeValue.PURE_WHITE_COLOR}
+        backgroundColorHover={themeValue.DARK_BLUE_COLOR}
+        colorHover={themeValue.PURE_WHITE_COLOR}
       >
         Swap theme
       </Button>

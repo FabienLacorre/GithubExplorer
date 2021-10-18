@@ -22,6 +22,7 @@ const Home: NextPage<{}> = ({}) => {
   const [inputContent, setInputContent] = useState("traefik/mesh");
 
   useEffect(() => {
+    // THEME SWAP CODE
     const themeValueLocalStorage: string | null =
       window.localStorage.getItem("THEME");
     setThemeValue(GetCorrectTheme(themeValueLocalStorage));

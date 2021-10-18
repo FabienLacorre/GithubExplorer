@@ -5,12 +5,7 @@ import styles from "../styles/Home.module.css";
 import Text from "./Components/basic-element/text";
 import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
-import {
-  BLUE_COLOR,
-  GREY_COLOR,
-  LIGHT_GREY_COLOR,
-  RED_ERROR_COLOR,
-} from "../constants/colors";
+import { GetCorrectTheme } from "../constants/colors";
 import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
@@ -26,6 +21,7 @@ const Details: NextPage<{
   const [issuesValues, setIssuesValues] = useState([]);
   const [closedIssuesValues, setClosedIssuesValues] = useState([]);
   const [messageDisplay, setMessageDisplay] = useState("");
+  const [themeValue, setThemeValue]: any = useState({});
 
   const openIssuesChartData = {
     label: "Open issues",
@@ -54,8 +50,12 @@ const Details: NextPage<{
     datasets: [openIssuesChartData, closedIssuesChartData],
   };
 
-  console.log(closedIssues);
   useEffect(() => {
+    // THEME SWAP CODE
+    const themeValueLocalStorage: string | null =
+      window.localStorage.getItem("THEME");
+    setThemeValue(GetCorrectTheme(themeValueLocalStorage));
+
     formatDataIssues(openedIssues, setIssuesValues);
     formatDataIssues(closedIssues, setClosedIssuesValues);
   }, []);
@@ -101,26 +101,26 @@ const Details: NextPage<{
                 });
               }}
             >
-              <Text size={16} bold={true} color={BLUE_COLOR}>
+              <Text size={16} bold={true} color={themeValue.BLUE_COLOR}>
                 Choose another repository
               </Text>
             </div>
           </Container>
           <Container>
-            <Text size={50} bold={true} color={GREY_COLOR}>
+            <Text size={50} bold={true} color={themeValue.GREY_COLOR}>
               {owner}/{repo}
             </Text>
           </Container>
 
           <Container>
-            <Text size={20} color={LIGHT_GREY_COLOR}>
+            <Text size={20} color={themeValue.LIGHT_GREY_COLOR}>
               {description}
             </Text>
           </Container>
 
           <Container>
             {messageDisplay != "" ? (
-              <Text bold={true} size={16} color={RED_ERROR_COLOR}>
+              <Text bold={true} size={16} color={themeValue.RED_ERROR_COLOR}>
                 {messageDisplay}
               </Text>
             ) : (
