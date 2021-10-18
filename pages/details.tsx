@@ -16,15 +16,18 @@ import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
 
 const Details: React.FunctionComponent<{
-  newData: any;
+  openedIssues: any;
   owner: string;
   repo: string;
+  closedIssues: any;
   description: string;
-}> = ({ newData, owner, repo, description }) => {
+}> = ({ openedIssues, owner, repo, description, closedIssues }) => {
   const router = useRouter();
   const [issuesValues, setIssuesValues] = useState([]);
+  const [closedIssuesValues, setClosedIssuesValues] = useState([]);
   const [messageDisplay, setMessageDisplay] = useState("");
-  const issues = {
+
+  const openIssuesChartData = {
     label: "Open issues",
     fill: false,
     lineTension: 0.1,
@@ -35,16 +38,29 @@ const Details: React.FunctionComponent<{
     data: issuesValues,
   };
 
-  const dataChart = {
-    labels: xValues,
-    datasets: [issues],
+  const closedIssuesChartData = {
+    label: "closed issues",
+    fill: false,
+    lineTension: 0.1,
+    backgroundColor: "red",
+    borderColor: "red",
+    pointRadius: 1,
+    pointHitRadius: 10,
+    data: closedIssuesValues,
   };
 
+  const dataChart = {
+    labels: xValues,
+    datasets: [openIssuesChartData, closedIssuesChartData],
+  };
+
+  console.log(closedIssues);
   useEffect(() => {
-    formatDataIssues(newData);
+    formatDataIssues(openedIssues, setIssuesValues);
+    formatDataIssues(closedIssues, setClosedIssuesValues);
   }, []);
 
-  const formatDataIssues = (issues: any) => {
+  const formatDataIssues = (issues: any, setter: any) => {
     if (issues.message) {
       setMessageDisplay(issues.message);
       return;
@@ -64,7 +80,7 @@ const Details: React.FunctionComponent<{
     keys.forEach((k: string) => {
       tmpValues.push(values[k].number);
     });
-    setIssuesValues(tmpValues);
+    setter(tmpValues);
   };
 
   return (
@@ -125,27 +141,44 @@ export const getServerSideProps = async (context: any) => {
     },
   };
 
+  const requestOptions = {
+    method: "GET",
+    headers: { Accept: "application/vnd.github.v3.star+json" },
+  };
+
   const { owner, repo, description } = context.query;
   if (owner && repo) {
     const req = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
+      `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`,
+      { ...requestOptions }
     );
-    const newData = await req.json();
+
+    const closedIssuesReq = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/issues?state=closed&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`,
+      { ...requestOptions }
+    );
+    const openedIssues = await req.json();
+
+    const closedIssues = await closedIssuesReq.json();
+
+    console.log(closedIssues);
     return {
       props: {
-        newData,
+        openedIssues,
         owner,
         repo,
         description: description == null ? "" : description,
+        closedIssues,
       },
     };
   } else {
     return {
       props: {
-        newData: [],
+        openedIssues: [],
         owner: "",
         repo: "",
         description: "",
+        closedIssues: [],
       },
     };
   }
