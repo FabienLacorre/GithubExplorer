@@ -52,7 +52,7 @@ const Details: React.FunctionComponent<{
       setMessageDisplay(issues.message);
       return;
     }
-    if (issues == null || issues?.lenth == null) {
+    if (issues == null || issues?.length == null) {
       return;
     }
     const values: any = {};
