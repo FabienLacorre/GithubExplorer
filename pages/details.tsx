@@ -8,11 +8,10 @@ import Container from "./Components/basic-element/container";
 import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "../constants/colors";
 import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
+import { xValues } from "../constants/chartValues";
 
 const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
   const router = useRouter();
-  const [date, setDate] = useState("2020-01-01");
-  const [xValues, setXValues] = useState([]);
   const [issuesValues, setIssuesValues] = useState([]);
 
   const issues = {
@@ -35,25 +34,26 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
     formatDataIssues(newData);
   }, []);
 
-  const formatDataIssues = (commits: any) => {
-    const tmpXValues: any = [];
-    commits.forEach((e: any, index: number) => {
-      let indexTable = tmpXValues.findIndex(
-        (tmpXValue: any) => tmpXValue.date === e?.updated_at?.substring(0, 7)
+  const formatDataIssues = (issues: any) => {
+    const values: any = [];
+    xValues.forEach((x: any) => {
+      values.push({ date: x, number: 0 });
+    });
+    issues.forEach((e: any) => {
+      let indexTable = values.findIndex(
+        (v: any) => v.date === e?.updated_at?.substring(0, 7)
       );
-      if (indexTable == -1) {
-        tmpXValues.push({ date: e?.updated_at?.substring(0, 7), number: 1 });
-      } else {
-        tmpXValues[indexTable].number = tmpXValues[indexTable].number + 1;
+      if (indexTable != -1){
+        values[indexTable].number = values[indexTable].number + 1;
       }
     });
+
     const tmpDate: any = [];
     const tmpValues: any = [];
-    tmpXValues.forEach((e: any) => {
+    values.forEach((e: any) => {
       tmpDate.push(e.date);
       tmpValues.push(e.number);
     });
-    setXValues(tmpDate.reverse());
     setIssuesValues(tmpValues.reverse());
   };
 
