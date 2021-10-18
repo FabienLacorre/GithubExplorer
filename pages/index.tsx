@@ -9,6 +9,7 @@ import Container from "./Components/basic-element/container";
 import { GetCorrectTheme } from "../constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
+import { StyledContainer, StyledMain } from "../styles/style";
 
 const Home: NextPage<{}> = ({}) => {
   const [themeValue, setThemeValue]: any = useState({});
@@ -79,14 +80,14 @@ const Home: NextPage<{}> = ({}) => {
   };
 
   return (
-    <div className={styles.container}>
+    <StyledContainer>
       <Head>
         <title>Traefik</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Layout>
-        <div className={styles.main}>
+        <StyledMain >
           <Container>
             <Text size={50} bold={true} color={themeValue.GREY_COLOR}>
               GitHub Indicators Explorer
@@ -128,9 +129,9 @@ const Home: NextPage<{}> = ({}) => {
               />
             </form>
           </div>
-        </div>
+        </StyledMain>
       </Layout>
-    </div>
+    </StyledContainer>
   );
 };
 

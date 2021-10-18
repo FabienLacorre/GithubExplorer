@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import { StyledContainer, StyledMain } from "../styles/style";
 import Text from "./Components/basic-element/text";
 import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
@@ -84,7 +84,7 @@ const Details: NextPage<{
   };
 
   return (
-    <div className={styles.container}>
+    <StyledContainer>
       <Head>
         <title>Details</title>
         <link rel="icon" href="/favicon.ico" />
@@ -129,7 +129,7 @@ const Details: NextPage<{
           </Container>
         </div>
       </Layout>
-    </div>
+    </StyledContainer>
   );
 };
 

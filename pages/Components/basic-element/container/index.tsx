@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DEFAULT_SPACING_CONTAINER } from "../../../../constants/spacing";
+import { StyledContainer } from "./style";
 
 type Props = {
   children: any;
@@ -12,11 +12,12 @@ const Container: React.FunctionComponent<Props> = ({
   spacing,
   padding,
 }) => {
-  const style = {
-    marginBottom: spacing != null ? spacing : DEFAULT_SPACING_CONTAINER,
-    padding: padding != null ? padding : 0,
-  };
-  return <div style={style}>{children}</div>;
+  const style = {};
+  return (
+    <StyledContainer spacing={spacing} padding={padding} style={style}>
+      {children}
+    </StyledContainer>
+  );
 };
 
 export default Container;

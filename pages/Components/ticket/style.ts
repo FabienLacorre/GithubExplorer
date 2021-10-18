@@ -1,11 +1,13 @@
-/* .ticketContainer {
+import styled from "styled-components";
+
+const StyledTicketContainer = styled.div`
   height: 400px;
   overflow-x: hidden;
   overflow-y: scroll;
   padding-right: 8px;
-}
+`;
 
-.ticket {
+const StyledTicket = styled.div`
   position: relative;
   height: 66px;
   width: 100%;
@@ -18,39 +20,38 @@
   cursor: pointer;
   overflow: hidden;
   transition: 0.3s ease;
-}
+  &:hover {
+    background-color: #f5f5f5;
+    border: 1px solid #6786d3;
+  }
+`;
 
-.ticket:hover {
-  background-color: #f5f5f5;
-  border: 1px solid #6786d3;
-}
-
-.container {
+const StyledContainer = styled.div`
   display: flex;
-}
+`;
 
-.logoContainer {
+const StyledLogoContainer = styled.div`
   height: 51px;
   width: 51px;
-}
+`;
 
-.textContainer {
+const StyledTextContainer = styled.div`
   padding-top: 5px;
   margin-left: 14px;
   width: 300px;
   display: flex;
   flex-direction: column;
   text-align: left;
-}
+`;
 
-.logoImage {
+const StyledLogoImage = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
-}
+`;
 
-.selectButtonContainer {
+const StyledSelectButtonContainer = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
@@ -58,10 +59,21 @@
   height: calc(100% - 13px);
   right: 15px;
   transition: 0.3s ease;
-}
+`;
 
-.selectButton {
+const StyledSelectButton = styled.button`
   background-color: rgba(0, 0, 0, 0);
   border: 0px;
   cursor: pointer;
-} */
+`;
+
+export {
+  StyledTicketContainer,
+  StyledTicket,
+  StyledContainer,
+  StyledLogoContainer,
+  StyledTextContainer,
+  StyledLogoImage,
+  StyledSelectButtonContainer,
+  StyledSelectButton,
+};

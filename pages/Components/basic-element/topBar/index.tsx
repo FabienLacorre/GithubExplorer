@@ -8,21 +8,13 @@ import Button from "../button";
 import Text from "../text";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { StyledTopBar, StyledTitleContainer } from "./style";
 type Props = {};
 
 const TopBar: React.FunctionComponent<Props> = ({}) => {
   const router = useRouter();
   const [themeValue, setThemeValue]: any = useState({});
-  const style = {
-    width: "100%",
-    height: 80,
-    backgroundColor: themeValue.BLUE_COLOR,
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: 70,
-    paddingRight: 70,
-    justifyContent: "space-between",
-  };
+  const style = {};
 
   useEffect(() => {
     // THEME SWAP CODE
@@ -44,20 +36,24 @@ const TopBar: React.FunctionComponent<Props> = ({}) => {
     window.location.reload();
   };
 
+  const handleRediction = () => {
+    router.push({
+      pathname: "/",
+    });
+  };
+
   return (
-    <div style={style}>
-      <div
+    <StyledTopBar>
+      <StyledTitleContainer
         style={{ cursor: "pointer" }}
         onClick={() => {
-          router.push({
-            pathname: "/",
-          });
+          handleRediction();
         }}
       >
         <Text size={16} bold={true} color={themeValue.WHITE_COLOR}>
           GitHub Indicators Explorer
         </Text>
-      </div>
+      </StyledTitleContainer>
 
       <Button
         clickHandler={SwapTheme}
@@ -68,7 +64,7 @@ const TopBar: React.FunctionComponent<Props> = ({}) => {
       >
         Swap theme
       </Button>
-    </div>
+    </StyledTopBar>
   );
 };
 

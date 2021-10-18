@@ -1,6 +1,6 @@
-import styles from "./style.module.css";
 import Ticket from "./index";
 import { useRouter } from "next/router";
+import { StyledTicketContainer } from "./style";
 
 const TicketContainer: React.FunctionComponent<{
   data: any;
@@ -19,8 +19,11 @@ const TicketContainer: React.FunctionComponent<{
     });
   };
 
+  if (visibility != true) {
+    return null;
+  }
   return (
-    <div className={visibility == true ? styles.ticketContainer : ""}>
+    <StyledTicketContainer>
       {data &&
         data?.map((e: any, index: number) => {
           return (
@@ -38,7 +41,7 @@ const TicketContainer: React.FunctionComponent<{
             </div>
           );
         })}
-    </div>
+    </StyledTicketContainer>
   );
 };
 

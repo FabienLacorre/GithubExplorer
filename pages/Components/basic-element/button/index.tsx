@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { GetCorrectTheme } from "../../../../constants/colors";
+import { LIGHT_THEME } from "../../../../constants/colors";
+import { StyledButton } from "./style";
 
 type Props = {
   color?: string;
@@ -21,59 +22,19 @@ const Button: React.FunctionComponent<Props> = ({
   fullWidth,
   disabled,
 }) => {
-  const [hoverStyle, setHoverStyle] = useState(false);
-  const [themeValue, setThemeValue]: any = useState({});
-
-  const style = {
-    borderRadius: 14,
-    border: 0,
-    marginRight: 12,
-    paddingLeft: 24,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingRight: 24,
-    cursor: "pointer",
-    transition: "0.3s ease",
-    width: fullWidth == true ? "100%" : "",
-  };
-
-  const colorStyle = {
-    backgroundColor:
-      backgroundColor != null ? backgroundColor : themeValue.BLUE_COLOR,
-    color: color != null ? color : themeValue.WHITE_COLOR,
-  };
-
-  const colorStyleHover = {
-    backgroundColor:
-      backgroundColorHover != null
-        ? backgroundColorHover
-        : themeValue.DARK_BLUE_COLOR,
-    color: colorHover != null ? colorHover : themeValue.WHITE_COLOR,
-  };
-
-  let currentStyles = colorStyle;
-
-  useEffect(() => {
-    // THEME SWAP CODE
-    const themeValueLocalStorage: string | null =
-      window.localStorage.getItem("THEME");
-    setThemeValue(GetCorrectTheme(themeValueLocalStorage));
-  }, []);
-
-  if (hoverStyle == true) {
-    currentStyles = colorStyleHover;
-  }
-
   return (
-    <button
-      disabled={disabled == true ? true : false}
+    <StyledButton
+      theme={LIGHT_THEME}
+      backgroundColor={backgroundColor}
+      backgroundColorHover={backgroundColorHover}
+      color={color}
+      colorHover={colorHover}
+      fullWidth={fullWidth}
       onClick={clickHandler}
-      onMouseLeave={() => setHoverStyle(false)}
-      onMouseOver={() => setHoverStyle(true)}
-      style={{ ...style, ...currentStyles }}
+      disabled={disabled == true ? true : false}
     >
       {children}
-    </button>
+    </StyledButton>
   );
 };
 
