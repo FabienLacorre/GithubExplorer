@@ -42,6 +42,11 @@ const Home: NextPage<{}> = ({}) => {
         setColorButton(RED_ERROR_COLOR);
         setHoverColorButton(DARK_RED_ERROR_COLOR);
       }
+      if (req.status == 404) {
+        setTextInButton("Not found");
+        setColorButton(RED_ERROR_COLOR);
+        setHoverColorButton(DARK_RED_ERROR_COLOR);
+      }
       const newData = await req.json();
       if (newData?.items?.length == 0) {
         setTextInButton("Sorry, no results for your query");
