@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import {
-  BLACK_COLOR,
-  BLUE_COLOR,
-  DARK_BLUE_COLOR,
-  WHITE_COLOR,
-} from "../../../../constants/colors";
+import React, { useState, useEffect } from "react";
+import { GetCorrectTheme } from "../../../../constants/colors";
 
 type Props = {
   color?: string;
@@ -27,6 +22,7 @@ const Button: React.FunctionComponent<Props> = ({
   disabled,
 }) => {
   const [hoverStyle, setHoverStyle] = useState(false);
+  const [themeValue, setThemeValue]: any = useState({});
 
   const style = {
     borderRadius: 14,
@@ -42,17 +38,27 @@ const Button: React.FunctionComponent<Props> = ({
   };
 
   const colorStyle = {
-    backgroundColor: backgroundColor != null ? backgroundColor : BLUE_COLOR,
-    color: color != null ? color : WHITE_COLOR,
+    backgroundColor:
+      backgroundColor != null ? backgroundColor : themeValue.BLUE_COLOR,
+    color: color != null ? color : themeValue.WHITE_COLOR,
   };
 
   const colorStyleHover = {
     backgroundColor:
-      backgroundColorHover != null ? backgroundColorHover : DARK_BLUE_COLOR,
-    color: colorHover != null ? colorHover : WHITE_COLOR,
+      backgroundColorHover != null
+        ? backgroundColorHover
+        : themeValue.DARK_BLUE_COLOR,
+    color: colorHover != null ? colorHover : themeValue.WHITE_COLOR,
   };
 
   let currentStyles = colorStyle;
+
+  useEffect(() => {
+    // THEME SWAP CODE
+    const themeValueLocalStorage: string | null =
+      window.localStorage.getItem("THEME");
+    setThemeValue(GetCorrectTheme(themeValueLocalStorage));
+  }, []);
 
   if (hoverStyle == true) {
     currentStyles = colorStyleHover;
