@@ -20,8 +20,8 @@ const TitleAndDescription: React.FunctionComponent<{
   let titleSubstring = title;
   let subTitleSubstring = subTitle;
 
-  if (titleSubstring?.length > 20) {
-    titleSubstring = titleSubstring.substring(0, 20) + "...";
+  if (titleSubstring?.length > 40) {
+    titleSubstring = titleSubstring.substring(0, 40) + "...";
   }
 
   if (subTitleSubstring?.length > 40) {
