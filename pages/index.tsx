@@ -1,26 +1,23 @@
 import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import SearchBar from "./Components/search-bar";
 import TicketContainer from "./Components/ticket/ticketContainer";
 import Text from "./Components/basic-element/text";
 import Container from "./Components/basic-element/container";
-import { GetCorrectTheme } from "../constants/colors";
+import { GetCorrectTheme, LIGHT_THEME } from "../constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 import { StyledContainer, StyledMain } from "../styles/style";
+import { RequestRepositories } from "../request";
 
 const Home: NextPage<{}> = ({}) => {
   const [themeValue, setThemeValue]: any = useState({});
   const [data, setData] = useState([]);
   const [textInButton, setTextInButton] = useState("Search");
   const [isLoading, setIsLoading] = useState(false);
-  const [colorButton, setColorButton] = useState(themeValue.BLUE_COLOR);
-  const [hoverColorButton, setHoverColorButton] = useState(
-    themeValue.DARK_BLUE_COLOR
-  );
   const [inputContent, setInputContent] = useState("traefik/mesh");
+  const [errorButton, setErrorButton] = useState("");
 
   useEffect(() => {
     // THEME SWAP CODE
@@ -31,43 +28,16 @@ const Home: NextPage<{}> = ({}) => {
 
   const fetchData = async () => {
     try {
-      // START LOADING
-      setColorButton(themeValue.BLUE_COLOR);
-      setHoverColorButton(themeValue.DARK_BLUE_COLOR);
       setIsLoading(true);
       setTextInButton("Loading...");
-      const req = await fetch(
-        `https://api.github.com/search/repositories?q=${inputContent}`
-      );
-      // OK
-      if (req.status == 200) {
-        setTextInButton("Search");
+      const { response, error } = await RequestRepositories(inputContent);
+      if (error != "") {
+        setErrorButton(error);
       }
-      // TOO MUTCH REQUEST
-      if (req.status == 403) {
-        setTextInButton("Too mutch requests... please retry later");
-        setColorButton(themeValue.RED_ERROR_COLOR);
-        setHoverColorButton(themeValue.DARK_RED_ERROR_COLOR);
-      }
-      // NOT FOUNT
-      if (req.status == 404) {
-        setTextInButton("Not found");
-        setColorButton(themeValue.RED_ERROR_COLOR);
-        setHoverColorButton(themeValue.DARK_RED_ERROR_COLOR);
-      }
-      const newData = await req.json();
-      // NO RESPONSE AVAILABLE
-      if (newData?.items?.length == 0) {
-        setTextInButton("Sorry, no results for your query");
-        setColorButton(themeValue.RED_ERROR_COLOR);
-        setHoverColorButton(themeValue.DARK_RED_ERROR_COLOR);
-      }
-      // END LOADING
-      setData(newData?.items);
+      setData(response?.items);
       setIsLoading(false);
+      setTextInButton("Search again ?");
     } catch (err) {
-      setColorButton(themeValue.RED_ERROR_COLOR);
-      setHoverColorButton(themeValue.DARK_RED_ERROR_COLOR);
       setTextInButton("Error please retry later");
       setIsLoading(false);
       console.log("err", err);
@@ -87,7 +57,7 @@ const Home: NextPage<{}> = ({}) => {
       </Head>
 
       <Layout>
-        <StyledMain >
+        <StyledMain>
           <Container>
             <Text size={50} bold={true} color={themeValue.GREY_COLOR}>
               GitHub Indicators Explorer
@@ -114,8 +84,9 @@ const Home: NextPage<{}> = ({}) => {
                   />
                 </Container>
                 <Button
-                  backgroundColor={colorButton}
-                  backgroundColorHover={hoverColorButton}
+                  error={errorButton}
+                  backgroundColor={LIGHT_THEME.BLUE_COLOR}
+                  backgroundColorHover={LIGHT_THEME.DARK_BLUE_COLOR}
                   disabled={isLoading}
                   fullWidth={true}
                   clickHandler={(e: any) => handleClick(e)}

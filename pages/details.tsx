@@ -9,7 +9,7 @@ import { GetCorrectTheme } from "../constants/colors";
 import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
-
+import { RequestIssues } from "../request/index";
 const Details: NextPage<{
   openedIssues: any;
   owner: string;
@@ -144,32 +144,7 @@ const formatIssuesRequest = (owner: string, repo: string, state: string) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-  const { owner, repo, description } = context.query;
-  if (owner && repo) {
-    const req = await fetch(formatIssuesRequest(owner, repo, "open"), {});
-    const closeReq = await fetch(formatIssuesRequest(owner, repo, "closed"));
-    const openedIssues = await req.json();
-    const closedIssues = await closeReq.json();
-    return {
-      props: {
-        openedIssues,
-        owner,
-        repo,
-        description: description == null ? "" : description,
-        closedIssues,
-      },
-    };
-  } else {
-    return {
-      props: {
-        openedIssues: [],
-        owner: "",
-        repo: "",
-        description: "",
-        closedIssues: [],
-      },
-    };
-  }
+  return await RequestIssues(context)
 };
 
 export default Details;

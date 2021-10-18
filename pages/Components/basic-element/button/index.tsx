@@ -10,6 +10,7 @@ type Props = {
   clickHandler?: any;
   fullWidth?: boolean;
   disabled?: boolean;
+  error?: string;
 };
 
 const Button: React.FunctionComponent<Props> = ({
@@ -21,14 +22,25 @@ const Button: React.FunctionComponent<Props> = ({
   clickHandler,
   fullWidth,
   disabled,
+  error,
 }) => {
   return (
     <StyledButton
       theme={LIGHT_THEME}
-      backgroundColor={backgroundColor}
-      backgroundColorHover={backgroundColorHover}
-      color={color}
-      colorHover={colorHover}
+      backgroundColor={
+        error != null && error != ""
+          ? LIGHT_THEME.RED_ERROR_COLOR
+          : backgroundColor
+      }
+      backgroundColorHover={
+        error != null && error != ""
+          ? LIGHT_THEME.DARK_RED_ERROR_COLOR
+          : backgroundColorHover
+      }
+      color={error != null && error != "" ? LIGHT_THEME.WHITE_COLOR : color}
+      colorHover={
+        error != null && error != "" ? LIGHT_THEME.WHITE_COLOR : colorHover
+      }
       fullWidth={fullWidth}
       onClick={clickHandler}
       disabled={disabled == true ? true : false}
