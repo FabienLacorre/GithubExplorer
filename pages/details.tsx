@@ -116,6 +116,12 @@ export const getServerSideProps = async (context: any) => {
     );
     const newData = await req.json();
     return { props: { newData } };
+  } else {
+    return {
+      props: {
+        newData: [],
+      },
+    };
   }
 };
 
