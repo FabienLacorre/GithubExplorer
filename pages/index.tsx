@@ -9,28 +9,37 @@ import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 import { StyledContainer, StyledMain } from "../styles/style";
 import { RequestRepositories } from "../request";
-import { useTheme, selectCorrectTheme } from "../hooks/context";
+import {
+  useTheme,
+  selectCorrectTheme,
+  useLang,
+  setCorrectLang,
+} from "../context";
 
 const Home: NextPage<{}> = ({}) => {
   const [data, setData] = useState([]);
   const { theme } = useTheme();
-  const [textInButton, setTextInButton] = useState("Search");
+  const { lang } = useLang();
   const [isLoading, setIsLoading] = useState(false);
   const [inputContent, setInputContent] = useState("traefik/mesh");
   const [errorButton, setErrorButton] = useState("");
   const CURRENT_THEME = selectCorrectTheme(theme);
+  const CURRENT_LANG = setCorrectLang(lang);
+  const [textInButton, setTextInButton] = useState(
+    CURRENT_LANG.homePage.buttonContent.search
+  );
 
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      setTextInButton("Loading...");
+      setTextInButton(CURRENT_LANG.homePage.buttonContent.loading);
       const { response, error } = await RequestRepositories(inputContent);
       if (error != "") {
         setErrorButton(error);
       }
       setData(response?.items);
       setIsLoading(false);
-      setTextInButton("Search again ?");
+      setTextInButton(CURRENT_LANG.homePage.buttonContent.searchAgain);
     } catch (err) {
       setTextInButton("Error please retry later");
       setIsLoading(false);
@@ -47,26 +56,24 @@ const Home: NextPage<{}> = ({}) => {
     <StyledContainer>
       <Head>
         <title>Traefik</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Layout>
         <StyledMain>
           <Container>
             <Text size={50} bold={true} color={CURRENT_THEME.GREY_COLOR}>
-              GitHub Indicators Explorer
+              {CURRENT_LANG.homePage.title}
             </Text>
           </Container>
           <Container>
             <Text size={20} bold={false} color={CURRENT_THEME.LIGHT_GREY_COLOR}>
-              GitHub Indicators Explorer can help you get key metrics about your
-              favourite github reposititories.
+              {CURRENT_LANG.homePage.subTitle}
             </Text>
           </Container>
           <div style={{ width: 486, textAlign: "left", marginTop: 60 }}>
             <Container>
               <Text size={32} bold={true} color={CURRENT_THEME.GREY_COLOR}>
-                Select a repository
+                {CURRENT_LANG.homePage.selectRepo}
               </Text>
             </Container>
             <form>

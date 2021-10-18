@@ -9,7 +9,12 @@ import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
 import { RequestIssues } from "../request/index";
-import { useTheme, selectCorrectTheme } from "../hooks/context";
+import {
+  useTheme,
+  selectCorrectTheme,
+  useLang,
+  setCorrectLang,
+} from "../context";
 
 const Details: NextPage<{
   openedIssues: any;
@@ -19,11 +24,13 @@ const Details: NextPage<{
   description: string;
 }> = ({ openedIssues, owner, repo, description, closedIssues }) => {
   const router = useRouter();
+  const { lang } = useLang();
   const { theme } = useTheme();
   const CURRENT_THEME = selectCorrectTheme(theme);
   const [issuesValues, setIssuesValues] = useState([]);
   const [closedIssuesValues, setClosedIssuesValues] = useState([]);
   const [messageDisplay, setMessageDisplay] = useState("");
+  const CURRENT_LANG = setCorrectLang(lang);
 
   const dataChart = {
     labels: xValues,
@@ -78,27 +85,24 @@ const Details: NextPage<{
     });
     setter(tmpValues);
   };
+  const goBackHandler = () => {
+    router.push({
+      pathname: "/",
+    });
+  };
 
   return (
     <StyledContainer>
       <Head>
         <title>Details</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Layout>
         <div style={{ padding: 50 }}>
           <Container>
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                router.push({
-                  pathname: "/",
-                });
-              }}
-            >
+            <div style={{ cursor: "pointer" }} onClick={goBackHandler}>
               <Text size={16} bold={true} color={CURRENT_THEME.BLUE_COLOR}>
-                Choose another repository
+                {CURRENT_LANG.detail.back}
               </Text>
             </div>
           </Container>

@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { LIGHT_THEME, DARK_THEME } from "../constants/colors";
-
+import { PORTUGUESE, ENGLISH } from "../constants/language";
 // THEME CONTEXT
 
 export enum Theme {
@@ -28,7 +28,7 @@ export const useTheme = () => useContext(ThemeContext);
 // LANGUAGE CONTEXT
 
 export enum Lang {
-  FR = "fr",
+  PO = "PO",
   EN = "en",
 }
 
@@ -36,8 +36,15 @@ export const LangContext = createContext<{
   lang: Lang;
   setLang: (lang: Lang) => void;
 }>({
-  lang: Lang.FR,
+  lang: Lang.PO,
   setLang: (Lang) => {},
 });
+
+export const setCorrectLang = (lang: Lang) => {
+  if (lang == Lang.PO) {
+    return PORTUGUESE;
+  }
+  return ENGLISH;
+};
 
 export const useLang = () => useContext(LangContext);

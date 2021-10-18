@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledLayout } from "./style";
-import { useTheme, selectCorrectTheme } from "../../../../hooks/context";
+import { useTheme, selectCorrectTheme } from "../../../../context";
 type Props = {
   children: any;
 };

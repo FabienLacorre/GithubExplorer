@@ -10,7 +10,7 @@ const RequestRepositories = async (value: string) => {
     error = "Not found";
   }
   const newData = await req.json();
-  if (newData?.items?.length == 0) {
+  if (newData?.items?.length == 0 || req.status == 422) {
     error = "Sorry, no results for your query";
   }
   return {
