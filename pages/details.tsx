@@ -58,7 +58,7 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
       </Head>
 
       <Layout>
-        <>
+        <div style={{padding: 50}}>
           <Container>
             <div
               style={{ cursor: "pointer" }}
@@ -88,7 +88,7 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
           <Container>
             <Line data={dataChart} width={100} height={25} />
           </Container>
-        </>
+        </div>
       </Layout>
     </div>
   );

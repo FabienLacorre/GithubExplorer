@@ -6,7 +6,7 @@ import SearchBar from "./Components/search-bar";
 import TicketContainer from "./Components/ticket/ticketContainer";
 import Text from "./Components/basic-element/text";
 import Container from "./Components/basic-element/container";
-import { GREY_COLOR } from "../constants/colors";
+import { GREY_COLOR, LIGHT_GREY_COLOR } from "../constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 
@@ -40,7 +40,19 @@ const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
 
       <Layout>
         <div className={styles.main}>
-          <div style={{ width: 486, textAlign: "left" }}>
+          {" "}
+          <Container>
+            <Text size={50} bold={true} color={GREY_COLOR}>
+              GitHub Indicators Explorer
+            </Text>
+          </Container>
+          <Container>
+            <Text size={20} bold={false} color={LIGHT_GREY_COLOR}>
+              GitHub Indicators Explorer can help you get key metrics about your
+              favourite github reposititories.
+            </Text>
+          </Container>
+          <div style={{ width: 486, textAlign: "left", marginTop:  60}}>
             <Container>
               <Text size={32} bold={true} color={GREY_COLOR}>
                 Select a repository
