@@ -10,10 +10,17 @@ import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
 
-const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
+const Details: React.FunctionComponent<{
+  newData: any;
+  owner: string;
+  repo: string;
+}> = ({ newData, owner, repo }) => {
   const router = useRouter();
   const [issuesValues, setIssuesValues] = useState([]);
 
+  console.log(newData);
+  console.log(owner);
+  console.log(repo);
   const issues = {
     label: "Open issues",
     fill: false,
@@ -46,7 +53,7 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
     const keys = Object.keys(values);
     keys.forEach((k: string) => {
       tmpValues.push(values[k].number);
-    })
+    });
     setIssuesValues(tmpValues);
   };
 
@@ -58,7 +65,7 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
       </Head>
 
       <Layout>
-        <div style={{padding: 50}}>
+        <div style={{ padding: 50 }}>
           <Container>
             <div
               style={{ cursor: "pointer" }}
@@ -75,7 +82,7 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
           </Container>
           <Container>
             <Text size={50} bold={true} color={GREY_COLOR}>
-              Traefik/traefik
+              {owner}/{repo}
             </Text>
           </Container>
 
@@ -108,11 +115,13 @@ export const getServerSideProps = async (context: any) => {
       `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
     );
     const newData = await req.json();
-    return { props: { newData } };
+    return { props: { newData, owner, repo } };
   } else {
     return {
       props: {
         newData: [],
+        owner: "",
+        repo: "",
       },
     };
   }
