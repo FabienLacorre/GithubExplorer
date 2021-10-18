@@ -15,7 +15,6 @@ const TicketContainer: React.FunctionComponent<{
           <div key={index + "tickets"}>
             <Ticket
               handlerRedirection={() => {
-                console.log(e);
                 router.push({
                   pathname: "/details",
                   query: {

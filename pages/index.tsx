@@ -28,7 +28,6 @@ const Home: NextPage<{}> = ({}) => {
     setThemeValue(GetCorrectTheme(themeValueLocalStorage));
   }, []);
 
-  console.log(themeValue);
   const fetchData = async () => {
     try {
       // START LOADING

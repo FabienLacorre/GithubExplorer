@@ -27,7 +27,6 @@ const DARK_THEME = {
 };
 
 const GetCorrectTheme = (value: string | null) => {
-  console.log(value)
   if (value == "dark") {
     return DARK_THEME;
   } else {
