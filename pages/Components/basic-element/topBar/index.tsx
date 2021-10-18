@@ -7,9 +7,11 @@ import {
 import Button from "../button";
 import Text from "../text";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 type Props = {};
 
 const TopBar: React.FunctionComponent<Props> = ({}) => {
+  const router = useRouter();
   const [themeValue, setThemeValue]: any = useState({});
   const style = {
     width: "100%",
@@ -17,8 +19,8 @@ const TopBar: React.FunctionComponent<Props> = ({}) => {
     backgroundColor: themeValue.BLUE_COLOR,
     display: "flex",
     alignItems: "center",
-    paddingLeft: 50,
-    paddingRight: 50,
+    paddingLeft: 70,
+    paddingRight: 70,
     justifyContent: "space-between",
   };
 
@@ -44,9 +46,19 @@ const TopBar: React.FunctionComponent<Props> = ({}) => {
 
   return (
     <div style={style}>
-      <Text size={16} bold={true} color={themeValue.WHITE_COLOR}>
-        GitHub Indicators Explorer
-      </Text>
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          router.push({
+            pathname: "/",
+          });
+        }}
+      >
+        <Text size={16} bold={true} color={themeValue.WHITE_COLOR}>
+          GitHub Indicators Explorer
+        </Text>
+      </div>
+
       <Button
         clickHandler={SwapTheme}
         backgroundColor={themeValue.BLUE_COLOR}
