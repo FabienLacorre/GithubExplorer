@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import TopBar from "./Components/topBar";
-import { ThemeContext, Theme } from "../hooks/context";
+import { ThemeContext, LangContext, Theme, Lang } from "../hooks/context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState(Theme.Light);
+  const [lang, setLang] = useState(Lang.EN);
 
   return (
     <ThemeContext.Provider
@@ -14,8 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         setTheme,
       }}
     >
-      <TopBar />
-      <Component {...pageProps} />
+      <LangContext.Provider value={{ lang, setLang }}>
+        <TopBar />
+        <Component {...pageProps} />
+      </LangContext.Provider>
     </ThemeContext.Provider>
   );
 }
