@@ -35,26 +35,19 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
   }, []);
 
   const formatDataIssues = (issues: any) => {
-    const values: any = [];
+    const values: any = {};
     xValues.forEach((x: any) => {
-      values.push({ date: x, number: 0 });
+      values[x] = { number: 0 };
     });
     issues.forEach((e: any) => {
-      let indexTable = values.findIndex(
-        (v: any) => v.date === e?.updated_at?.substring(0, 7)
-      );
-      if (indexTable != -1){
-        values[indexTable].number = values[indexTable].number + 1;
-      }
+      values[e?.updated_at?.substring(0, 7)].number += 1;
     });
-
-    const tmpDate: any = [];
     const tmpValues: any = [];
-    values.forEach((e: any) => {
-      tmpDate.push(e.date);
-      tmpValues.push(e.number);
-    });
-    setIssuesValues(tmpValues.reverse());
+    const keys = Object.keys(values);
+    keys.forEach((k: string) => {
+      tmpValues.push(values[k].number);
+    })
+    setIssuesValues(tmpValues);
   };
 
   return (
