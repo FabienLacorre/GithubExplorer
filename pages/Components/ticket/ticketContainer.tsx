@@ -8,7 +8,6 @@ const TicketContainer: React.FunctionComponent<{
 }> = ({ data, visibility }) => {
   const router = useRouter();
 
-  console.log(data);
   return (
     <div className={visibility == true ? styles.ticketContainer : ""}>
       {data.map((e: any, index: number) => {

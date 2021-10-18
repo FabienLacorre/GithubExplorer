@@ -11,7 +11,6 @@ import Button from "./Components/basic-element/button";
 import { useRouter } from "next/router";
 
 const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
-  console.log("newData", newData);
   const router = useRouter();
   const [date, setDate] = useState("2020-01-01");
   const [xValues, setXValues] = useState([]);
@@ -57,7 +56,6 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
     });
     setXValues(tmpDate.reverse());
     setIssuesValues(tmpValues.reverse());
-    console.log(tmpValues);
   };
 
   return (
@@ -121,7 +119,6 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-  console.log(context.query);
   const options = {
     since: {
       date: "2020-01-01",
@@ -135,7 +132,6 @@ export const getServerSideProps = async (context: any) => {
       `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
     );
     const newData = await req.json();
-    console.log(newData);
     return { props: { newData } };
   }
 };

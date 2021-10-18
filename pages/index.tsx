@@ -11,7 +11,6 @@ import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 
 const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
-  console.log("ici", post);
   const [data, setData] = useState([]);
   const [inputContent, setInputContent] = useState("traefik/mesh");
 
@@ -21,7 +20,6 @@ const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
         `https://api.github.com/search/repositories?q=${inputContent}`
       );
       const newData = await req.json();
-      console.log(newData);
       setData(newData.items);
     } catch (err) {
       console.log(err);
