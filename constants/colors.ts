@@ -1,3 +1,5 @@
+console.log("BEFORE ALL")
+
 // BLACK & WHITE
 const BLACK_COLOR = "#000000";
 const WHITE_COLOR = "#FFFFFF";
