@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { GetStaticProps } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SearchBar from "./Components/search-bar";
@@ -17,7 +17,7 @@ import {
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 
-const Home: React.FunctionComponent<{}> = ({}) => {
+const Home: NextPage<{}> = ({}) => {
   const [data, setData] = useState([]);
   const [textInButton, setTextInButton] = useState("Search");
   const [isLoading, setIsLoading] = useState(false);

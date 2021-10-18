@@ -15,7 +15,7 @@ import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
 
-const Details: React.FunctionComponent<{
+const Details: NextPage<{
   openedIssues: any;
   owner: string;
   repo: string;
@@ -133,35 +133,23 @@ const Details: React.FunctionComponent<{
   );
 };
 
-export const getServerSideProps = async (context: any) => {
+const formatIssuesRequest = (owner: string, repo: string, state: string) => {
   const options = {
     since: {
       date: "2020-01-01",
       time: "00:00:00",
     },
   };
+  return `https://api.github.com/repos/${owner}/${repo}/issues?state=${state}&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`;
+};
 
-  const requestOptions = {
-    method: "GET",
-    headers: { Accept: "application/vnd.github.v3.star+json" },
-  };
-
+export const getServerSideProps = async (context: any) => {
   const { owner, repo, description } = context.query;
   if (owner && repo) {
-    const req = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`,
-      { ...requestOptions }
-    );
-
-    const closedIssuesReq = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/issues?state=closed&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`,
-      { ...requestOptions }
-    );
+    const req = await fetch(formatIssuesRequest(owner, repo, "open"), {});
+    const closeReq = await fetch(formatIssuesRequest(owner, repo, "closed"));
     const openedIssues = await req.json();
-
-    const closedIssues = await closedIssuesReq.json();
-
-    console.log(closedIssues);
+    const closedIssues = await closeReq.json();
     return {
       props: {
         openedIssues,
