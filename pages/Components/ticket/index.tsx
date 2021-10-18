@@ -42,7 +42,7 @@ const SelectButton: React.FunctionComponent<{ display: boolean }> = ({
   display,
 }) => {
   const [themeValue, setThemeValue]: any = useState({});
-  
+
   useEffect(() => {
     // THEME SWAP CODE
     const themeValueLocalStorage: string | null =
@@ -66,8 +66,8 @@ const Ticket: React.FunctionComponent<{
   title: string;
   subTitle: string;
   logoUrl: string;
-  handlerRedirection: any;
-}> = ({ title, subTitle, logoUrl, handlerRedirection }) => {
+  onSelect: any;
+}> = ({ title, subTitle, logoUrl, onSelect }) => {
   const [displaySelectButton, setDisplaySelectButton] = useState(false);
   const [themeValue, setThemeValue]: any = useState({});
 
@@ -80,7 +80,7 @@ const Ticket: React.FunctionComponent<{
 
   return (
     <div
-      onClick={() => handlerRedirection()}
+      onClick={() => onSelect()}
       className={styles.ticket}
       onMouseOver={() => {
         setDisplaySelectButton(true);
