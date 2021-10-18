@@ -15,11 +15,13 @@ const TicketContainer: React.FunctionComponent<{
           <div key={index + "tickets"}>
             <Ticket
               handlerRedirection={() => {
+                console.log(e);
                 router.push({
                   pathname: "/details",
                   query: {
                     owner: e?.full_name.split("/")[0],
                     repo: e?.full_name.split("/")[1],
+                    description: e?.description,
                   },
                 });
               }}

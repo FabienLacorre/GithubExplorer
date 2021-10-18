@@ -19,13 +19,10 @@ const Details: React.FunctionComponent<{
   newData: any;
   owner: string;
   repo: string;
-}> = ({ newData, owner, repo }) => {
+}> = ({ newData, owner, repo, description }) => {
   const router = useRouter();
   const [issuesValues, setIssuesValues] = useState([]);
   const [messageDisplay, setMessageDisplay] = useState("");
-  console.log(newData);
-  console.log(owner);
-  console.log(repo);
   const issues = {
     label: "Open issues",
     fill: false,
@@ -47,7 +44,6 @@ const Details: React.FunctionComponent<{
   }, []);
 
   const formatDataIssues = (issues: any) => {
-    console.log("issues", issues);
     if (issues.message) {
       setMessageDisplay(issues.message);
       return;
@@ -101,7 +97,7 @@ const Details: React.FunctionComponent<{
 
           <Container>
             <Text size={20} color={LIGHT_GREY_COLOR}>
-              The cloud native application
+              {description}
             </Text>
           </Container>
 
@@ -128,19 +124,20 @@ export const getServerSideProps = async (context: any) => {
     },
   };
 
-  const { owner, repo } = context.query;
+  const { owner, repo, description } = context.query;
   if (owner && repo) {
     const req = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=100&since=${options["since"]["date"]}T${options["since"]["time"]}Z&sort=updated`
     );
     const newData = await req.json();
-    return { props: { newData, owner, repo } };
+    return { props: { newData, owner, repo, description } };
   } else {
     return {
       props: {
         newData: [],
         owner: "",
         repo: "",
+        description: "",
       },
     };
   }

@@ -17,7 +17,7 @@ import {
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 
-const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
+const Home: React.FunctionComponent<{}> = ({}) => {
   const [data, setData] = useState([]);
   const [textInButton, setTextInButton] = useState("Search");
   const [isLoading, setIsLoading] = useState(false);
