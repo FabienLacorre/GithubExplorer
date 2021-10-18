@@ -7,7 +7,6 @@ import Layout from "./Components/basic-element/layout";
 import Container from "./Components/basic-element/container";
 import { BLUE_COLOR, GREY_COLOR, LIGHT_GREY_COLOR } from "../constants/colors";
 import { Line } from "react-chartjs-2";
-import Button from "./Components/basic-element/button";
 import { useRouter } from "next/router";
 
 const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
@@ -93,22 +92,6 @@ const Details: React.FunctionComponent<{ newData: any }> = ({ newData }) => {
             </Text>
           </Container>
 
-          <Container>
-            <Button clickHandler={() => {}}>Change date</Button>
-            <input
-              style={{
-                height: 40,
-                paddingLeft: 8,
-                borderRadius: 8,
-                border: `1px solid ${BLUE_COLOR}`,
-              }}
-              onChange={(e) => {
-                setDate(e.target.value);
-              }}
-              value={date}
-              type="date"
-            />
-          </Container>
           <Container>
             <Line data={dataChart} width={100} height={25} />
           </Container>
