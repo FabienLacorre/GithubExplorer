@@ -8,6 +8,7 @@ const StyledLayout = styled.div<{
   height: 100vh;
   width: 100vw;
   padding: 20px;
+  transition: 0.3s ease;
 `;
 
 export { StyledLayout };

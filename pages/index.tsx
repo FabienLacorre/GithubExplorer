@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import SearchBar from "./Components/search-bar";
 import TicketContainer from "./Components/ticket/ticketContainer";
 import Text from "./Components/basic-element/text";
 import Container from "./Components/basic-element/container";
-import { LIGHT_THEME } from "../constants/colors";
 import Layout from "./Components/basic-element/layout";
 import Button from "./Components/basic-element/button";
 import { StyledContainer, StyledMain } from "../styles/style";
 import { RequestRepositories } from "../request";
+import { useTheme, selectCorrectTheme } from "../hooks/context";
 
 const Home: NextPage<{}> = ({}) => {
   const [data, setData] = useState([]);
+  const { theme } = useTheme();
   const [textInButton, setTextInButton] = useState("Search");
   const [isLoading, setIsLoading] = useState(false);
   const [inputContent, setInputContent] = useState("traefik/mesh");
   const [errorButton, setErrorButton] = useState("");
-
+  const CURRENT_THEME = selectCorrectTheme(theme);
 
   const fetchData = async () => {
     try {
@@ -52,19 +53,19 @@ const Home: NextPage<{}> = ({}) => {
       <Layout>
         <StyledMain>
           <Container>
-            <Text size={50} bold={true} color={LIGHT_THEME.GREY_COLOR}>
+            <Text size={50} bold={true} color={CURRENT_THEME.GREY_COLOR}>
               GitHub Indicators Explorer
             </Text>
           </Container>
           <Container>
-            <Text size={20} bold={false} color={LIGHT_THEME.LIGHT_GREY_COLOR}>
+            <Text size={20} bold={false} color={CURRENT_THEME.LIGHT_GREY_COLOR}>
               GitHub Indicators Explorer can help you get key metrics about your
               favourite github reposititories.
             </Text>
           </Container>
           <div style={{ width: 486, textAlign: "left", marginTop: 60 }}>
             <Container>
-              <Text size={32} bold={true} color={LIGHT_THEME.GREY_COLOR}>
+              <Text size={32} bold={true} color={CURRENT_THEME.GREY_COLOR}>
                 Select a repository
               </Text>
             </Container>
@@ -78,8 +79,8 @@ const Home: NextPage<{}> = ({}) => {
                 </Container>
                 <Button
                   error={errorButton}
-                  backgroundColor={LIGHT_THEME.BLUE_COLOR}
-                  backgroundColorHover={LIGHT_THEME.DARK_BLUE_COLOR}
+                  backgroundColor={CURRENT_THEME.BLUE_COLOR}
+                  backgroundColorHover={CURRENT_THEME.DARK_BLUE_COLOR}
                   disabled={isLoading}
                   fullWidth={true}
                   clickHandler={(e: any) => handleClick(e)}

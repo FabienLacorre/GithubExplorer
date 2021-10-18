@@ -22,8 +22,8 @@ const DARK_THEME = {
   LIGHT_GREY_COLOR: "#EDEDED",
   BLUE_COLOR: "#6786D3",
   DARK_BLUE_COLOR: "#4F6DB8",
-  RED_ERROR_COLOR: "#EDEDED",
-  DARK_RED_ERROR_COLOR: "#EDEDED",
+  RED_ERROR_COLOR: "#FF5757",
+  DARK_RED_ERROR_COLOR: "#E34A4A",
 };
 
 const GetCorrectTheme = (value: string | null) => {

@@ -9,7 +9,7 @@ import { Line } from "react-chartjs-2";
 import { useRouter } from "next/router";
 import { xValues } from "../constants/chartValues";
 import { RequestIssues } from "../request/index";
-import { LIGHT_THEME } from "../constants/colors";
+import { useTheme, selectCorrectTheme } from "../hooks/context";
 
 const Details: NextPage<{
   openedIssues: any;
@@ -19,6 +19,8 @@ const Details: NextPage<{
   description: string;
 }> = ({ openedIssues, owner, repo, description, closedIssues }) => {
   const router = useRouter();
+  const { theme } = useTheme();
+  const CURRENT_THEME = selectCorrectTheme(theme);
   const [issuesValues, setIssuesValues] = useState([]);
   const [closedIssuesValues, setClosedIssuesValues] = useState([]);
   const [messageDisplay, setMessageDisplay] = useState("");
@@ -95,26 +97,26 @@ const Details: NextPage<{
                 });
               }}
             >
-              <Text size={16} bold={true} color={LIGHT_THEME.BLUE_COLOR}>
+              <Text size={16} bold={true} color={CURRENT_THEME.BLUE_COLOR}>
                 Choose another repository
               </Text>
             </div>
           </Container>
           <Container>
-            <Text size={50} bold={true} color={LIGHT_THEME.GREY_COLOR}>
+            <Text size={50} bold={true} color={CURRENT_THEME.GREY_COLOR}>
               {owner}/{repo}
             </Text>
           </Container>
 
           <Container>
-            <Text size={20} color={LIGHT_THEME.LIGHT_GREY_COLOR}>
+            <Text size={20} color={CURRENT_THEME.LIGHT_GREY_COLOR}>
               {description}
             </Text>
           </Container>
 
           <Container>
             {messageDisplay != "" ? (
-              <Text bold={true} size={16} color={LIGHT_THEME.RED_ERROR_COLOR}>
+              <Text bold={true} size={16} color={CURRENT_THEME.RED_ERROR_COLOR}>
                 {messageDisplay}
               </Text>
             ) : (

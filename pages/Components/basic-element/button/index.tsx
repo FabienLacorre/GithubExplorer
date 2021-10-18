@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LIGHT_THEME } from "../../../../constants/colors";
+import { useTheme, selectCorrectTheme } from "../../../../hooks/context";
 import { StyledButton } from "./style";
 
 type Props = {
@@ -24,22 +24,25 @@ const Button: React.FunctionComponent<Props> = ({
   disabled,
   error,
 }) => {
+  const { theme } = useTheme();
+  const CURRENT_THEME = selectCorrectTheme(theme);
+
   return (
     <StyledButton
-      theme={LIGHT_THEME}
+      theme={CURRENT_THEME}
       backgroundColor={
         error != null && error != ""
-          ? LIGHT_THEME.RED_ERROR_COLOR
+          ? CURRENT_THEME.RED_ERROR_COLOR
           : backgroundColor
       }
       backgroundColorHover={
         error != null && error != ""
-          ? LIGHT_THEME.DARK_RED_ERROR_COLOR
+          ? CURRENT_THEME.DARK_RED_ERROR_COLOR
           : backgroundColorHover
       }
-      color={error != null && error != "" ? LIGHT_THEME.WHITE_COLOR : color}
+      color={error != null && error != "" ? CURRENT_THEME.WHITE_COLOR : color}
       colorHover={
-        error != null && error != "" ? LIGHT_THEME.WHITE_COLOR : colorHover
+        error != null && error != "" ? CURRENT_THEME.WHITE_COLOR : colorHover
       }
       fullWidth={fullWidth}
       onClick={clickHandler}

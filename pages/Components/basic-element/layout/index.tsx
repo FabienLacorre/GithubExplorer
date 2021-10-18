@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { LIGHT_THEME } from "../../../../constants/colors";
+import React from "react";
 import { StyledLayout } from "./style";
-
+import { useTheme, selectCorrectTheme } from "../../../../hooks/context";
 type Props = {
   children: any;
 };
 
 const Layout: React.FunctionComponent<Props> = ({ children }) => {
-  return (
-    <StyledLayout theme={LIGHT_THEME}>
-      {children}
-    </StyledLayout>
-  );
+  const { theme } = useTheme();
+  const CURRENT_THEME = selectCorrectTheme(theme);
+
+  return <StyledLayout theme={CURRENT_THEME}>{children}</StyledLayout>;
 };
 
 export default Layout;
