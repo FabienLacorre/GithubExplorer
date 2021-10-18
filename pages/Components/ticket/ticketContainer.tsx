@@ -10,7 +10,7 @@ const TicketContainer: React.FunctionComponent<{
 
   return (
     <div className={visibility == true ? styles.ticketContainer : ""}>
-      {data.map((e: any, index: number) => {
+      {data && data?.map((e: any, index: number) => {
         return (
           <div key={index + "tickets"}>
             <Ticket

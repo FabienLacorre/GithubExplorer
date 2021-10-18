@@ -12,21 +12,30 @@ import Button from "./Components/basic-element/button";
 
 const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
   const [data, setData] = useState([]);
+  const [textInButton, setTextInButton] = useState("Search");
   const [isLoading, setIsLoading] = useState(false);
   const [inputContent, setInputContent] = useState("traefik/mesh");
 
   const fetchData = async () => {
     try {
       setIsLoading(true);
+      setTextInButton("Loading...");
       const req = await fetch(
         `https://api.github.com/search/repositories?q=${inputContent}`
       );
+      if (req.status == 200) {
+        setTextInButton("Search");
+      }
+      if (req.status == 403) {
+        setTextInButton("Too mutch requests... please retry later");
+      }
       const newData = await req.json();
       setData(newData.items);
       setIsLoading(false);
     } catch (err) {
+      setTextInButton("Error please retry later");
       setIsLoading(false);
-      console.log(err);
+      console.log("err", err);
     }
   };
 
@@ -71,14 +80,11 @@ const Home: React.FunctionComponent<{ post: any }> = ({ post }) => {
                   />
                 </Container>
                 <Button
+                  disabled={isLoading}
                   fullWidth={true}
                   clickHandler={(e: any) => handleClick(e)}
                 >
-                  {isLoading == true ? (
-                    <span>Loading ...</span>
-                  ) : (
-                    <span> Search</span>
-                  )}
+                  {textInButton}
                 </Button>
               </Container>
               <TicketContainer

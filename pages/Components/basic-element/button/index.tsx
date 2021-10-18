@@ -12,7 +12,8 @@ type Props = {
   backgroundColor?: string;
   backgroundColorHover?: string;
   clickHandler?: any;
-  fullWidth?: boolean,
+  fullWidth?: boolean;
+  disabled?: boolean;
 };
 
 const Button: React.FunctionComponent<Props> = ({
@@ -23,6 +24,7 @@ const Button: React.FunctionComponent<Props> = ({
   backgroundColorHover,
   clickHandler,
   fullWidth,
+  disabled,
 }) => {
   const [hoverStyle, setHoverStyle] = useState(false);
 
@@ -58,6 +60,7 @@ const Button: React.FunctionComponent<Props> = ({
 
   return (
     <button
+      disabled={disabled == true ? true : false}
       onClick={clickHandler}
       onMouseLeave={() => setHoverStyle(false)}
       onMouseOver={() => setHoverStyle(true)}
