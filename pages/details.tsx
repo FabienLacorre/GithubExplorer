@@ -19,6 +19,7 @@ const Details: React.FunctionComponent<{
   newData: any;
   owner: string;
   repo: string;
+  description: string;
 }> = ({ newData, owner, repo, description }) => {
   const router = useRouter();
   const [issuesValues, setIssuesValues] = useState([]);
