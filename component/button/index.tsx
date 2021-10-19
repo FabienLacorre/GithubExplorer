@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useTheme, selectCorrectTheme } from "../../../context";
+import { useTheme, selectCorrectTheme } from "../../context";
 import { StyledButton } from "./style";
 
 type Props = {

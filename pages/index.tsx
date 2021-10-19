@@ -3,10 +3,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import SearchBar from "../component/search-bar";
 import TicketContainer from "../component/ticket/ticketContainer";
-import Text from "../component/basic-element/text";
-import Container from "../component/basic-element/container";
-import Layout from "../component/basic-element/layout";
-import Button from "../component/basic-element/button";
+import Text from "../component/text";
+import Container from "../component/container";
+import Layout from "../component/layout";
+import Button from "../component/button";
 import { StyledContainer, StyledMain } from "../styles/style";
 import { RequestRepositories } from "../request";
 import {

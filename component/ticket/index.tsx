@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Text from "../basic-element/text";
+import Text from "../text";
 import {
   StyledTicket,
   StyledContainer,
