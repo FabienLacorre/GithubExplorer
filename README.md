@@ -1,5 +1,12 @@
 
-Technical test for the company Traefik
+Technical test for the company Traefik.
+
+Create an simple app who can get datas from github api.
+
+Bonus:
+
+- Theme swap.
+- Language swap.
 
 ## RUN PROJECT
 
