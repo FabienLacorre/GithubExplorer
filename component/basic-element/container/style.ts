@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEFAULT_SPACING_CONTAINER } from "../../../../constants/spacing";
+import { DEFAULT_SPACING_CONTAINER } from "../../../constants/spacing";
 
 const StyledContainer = styled.div<{
   spacing?: number;

@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import SearchBar from "./Components/search-bar";
-import TicketContainer from "./Components/ticket/ticketContainer";
-import Text from "./Components/basic-element/text";
-import Container from "./Components/basic-element/container";
-import Layout from "./Components/basic-element/layout";
-import Button from "./Components/basic-element/button";
+import SearchBar from "../component/search-bar";
+import TicketContainer from "../component/ticket/ticketContainer";
+import Text from "../component/basic-element/text";
+import Container from "../component/basic-element/container";
+import Layout from "../component/basic-element/layout";
+import Button from "../component/basic-element/button";
 import { StyledContainer, StyledMain } from "../styles/style";
 import { RequestRepositories } from "../request";
 import {

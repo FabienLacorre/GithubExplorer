@@ -10,7 +10,7 @@ import {
   useLang,
   Lang,
   setCorrectLang,
-} from "../../../context";
+} from "../../context";
 
 type Props = {};
 
